@@ -17,7 +17,7 @@ spec:
           image: confluentinc/cp-zookeeper:3.2.1
           env:
             - name: ZOOKEEPER_SERVER_ID
-              value: 1 
+              value: "1" 
           #  - name: ZOOKEEPER_CLIENT_PORT
           #    value: 2181 
           #  - name: ZOOKEEPER_TICK_TIME

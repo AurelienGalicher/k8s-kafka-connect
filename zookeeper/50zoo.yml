@@ -39,10 +39,10 @@ spec:
             - name: datadir
               mountPath: /data
             #There's defaults in this folder, such as logging config
-            - name: conf
-              mountPath: /conf
+            #- name: conf
+            #  mountPath: /conf
       volumes:
         - name: conf
           emptyDir: {}
-      - name: datadir
-          emptyDir: {}
+      #- name: datadir
+      #    emptyDir: {}

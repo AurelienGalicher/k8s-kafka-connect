@@ -42,7 +42,7 @@ spec:
             #- name: conf
             #  mountPath: /conf
       volumes:
-        - name: conf
+        #- name: conf
+        #  emptyDir: {}
+        - name: datadir
           emptyDir: {}
-      #- name: datadir
-      #    emptyDir: {}

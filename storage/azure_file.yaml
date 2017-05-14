@@ -5,5 +5,5 @@ metadata:
 provisioner: kubernetes.io/azure-file
 parameters:
   skuName: Standard_LRS
-  location: <location>
-  storageAccount: <azure_storage_account_name>
+  #location: <location>
+  storageAccount: kafkasecrets

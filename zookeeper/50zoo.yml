@@ -27,7 +27,7 @@ spec:
             - name: ZOOKEEPER_SYNC_LIMIT
               value: "2" 
             - name: ZOOKEEPER_SERVERS
-              value: "zoo-0.zoo:2888:3888;zoo-1.zoo:2888:3888;zoo-2.zoo:2888:3888"
+              value: zoo-0.zoo:2888:3888;zoo-1.zoo:2888:3888;zoo-2.zoo:2888:3888
           ports:
             - containerPort: 2181
               name: client

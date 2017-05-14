@@ -9,4 +9,6 @@ see http://docs.confluent.io/
   https://github.com/kubernetes/kubernetes/tree/master/examples/volumes/azure_file
 - manage security for kafka:
   https://github.com/confluentinc/confluent-platform-security-tools
+- kubernetes advanced scripting:
+  https://kubernetes.io/docs/tasks/configure-pod-container/environment-variable-expose-pod-information/
   

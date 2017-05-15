@@ -15,11 +15,19 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name: kafka-connect
-  annotations:
-    pod.beta.kubernetes.io/init-containers: '[
+spec:
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: kafka-connect
+      annotations:
+        pod.beta.kubernetes.io/init-containers: '[
           {
           "name": "install",
             "image": "busybox",
+            "imagePullPolicy": "IfNotPresent",
             "command": ["curl", "-k", "-SL", "https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-5.1.39.tar.gz","|", "tar", "-xzf", "-", "-C", "/work-dir/","--strip-components=1","mysql-connector-java-5.1.39/mysql-connector-java-5.1.39-bin.jar"],
             "volumeMounts": [
                 {
@@ -29,13 +37,6 @@ metadata:
             ]
           }
         ]'
-spec:
-  strategy:
-    type: Recreate
-  template:
-    metadata:
-      labels:
-        app: kafka-connect
     spec:
       containers:
       - image: confluentinc/cp-kafka-connect:latest

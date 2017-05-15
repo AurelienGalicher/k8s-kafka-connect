@@ -1,0 +1,73 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: topic-create-quickstart-avro-offsets 
+  #namespace: kafka
+spec:
+  template:
+    metadata:
+      name: topic-create-quickstart-avro-offsets 
+    spec:
+      containers:
+      - name: kafka
+        image: solsson/kafka:0.10.0.1
+        command:
+        - ./bin/kafka-topics.sh
+        - --create
+        - --topic 
+        - quickstart-avro-offsets 
+        - --partitions 
+        - "1" 
+        - --replication-factor 
+        - "1" 
+        - --if-not-exists 
+        - --zookeeper
+        - zookeeper:2181
+      restartPolicy: Never
+
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: topic-create-quickstart-avro-status
+  #namespace: kafka
+spec:
+  template:
+    metadata:
+      name: topic-create-quickstart-avro-status
+    spec:
+      containers:
+      - name: kafka
+        image: solsson/kafka:0.10.0.1
+        command:
+        - ./bin/kafka-topics.sh
+        - --create
+        - --topic 
+        - quickstart-avro-status
+        - --partitions 
+        - "1" 
+        - --replication-factor 
+        - "1" 
+        - --if-not-exists 
+        - --zookeeper
+        - zookeeper:2181
+      restartPolicy: Never
+
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: topic-describe
+  #namespace: kafka
+spec:
+  template:
+    metadata:
+      name: topic-describe
+    spec:
+      containers:
+      - name: kafka
+        image: solsson/kafka:0.10.0.1
+        command:
+        - ./bin/kafka-topics.sh
+        - --describe
+        - --zookeeper
+        - zookeeper:2181
+      restartPolicy: Never

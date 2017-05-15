@@ -22,6 +22,22 @@ spec:
     metadata:
       labels:
         app: kafka-connect
+      annotations:
+        pod.beta.kubernetes.io/init-containers: '[
+          {
+          "name": "install",
+            "image": "busybox",
+            "command": ["curl", "-k", "-SL", "https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-5.1.39.tar.gz",
+            "|", "tar", "-xzf", "-", "-C", "/work-dir/","--strip-components=1",
+            "mysql-connector-java-5.1.39/mysql-connector-java-5.1.39-bin.jar"],
+            "volumeMounts": [
+                {
+                    "name": "jars",
+                    "mountPath": "/work-dir"
+                }
+            ]
+          }
+        ]'
     spec:
       containers:
       - image: confluentinc/cp-kafka-connect:latest
@@ -65,25 +81,6 @@ spec:
             #There's defaults in this folder, such as logging config
             #- name: conf
             #  mountPath: /conf
-      initContainers:
-      - name: install
-        image: busybox
-        command:
-        - curl 
-        - "-k"
-        - "-SL"
-        - https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-5.1.39.tar.gz
-        - "|"
-        - tar 
-        - "-xzf"
-        - "-"
-        - "-C"
-        - /work-dir/
-        - "--strip-components=1"
-        - mysql-connector-java-5.1.39/mysql-connector-java-5.1.39-bin.jar
-        volumeMounts:
-        - name: jars
-          mountPath: "/work-dir"
       volumes:
         #- name: conf
         #  emptyDir: {}

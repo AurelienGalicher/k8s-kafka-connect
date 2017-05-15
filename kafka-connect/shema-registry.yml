@@ -14,7 +14,7 @@ spec:
     app: schema-registry
 ---
 apiVersion: extensions/v1beta1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: registry
 spec:

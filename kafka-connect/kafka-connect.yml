@@ -22,8 +22,8 @@ spec:
     metadata:
       labels:
         app: kafka-connect
-      annotations:
-        pod.beta.kubernetes.io/init-containers: '[
+    annotations:
+      pod.beta.kubernetes.io/init-containers: '[
           {
           "name": "install",
             "image": "busybox",

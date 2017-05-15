@@ -13,8 +13,8 @@ spec:
   selector:
     app: mysql
 ---
-apiVersion: apps/v1beta1
-kind: deployment
+apiVersion: extensions/v1beta1
+kind: Deployment
 metadata:
   name: mysql
 spec:

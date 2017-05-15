@@ -17,8 +17,8 @@ kind: StatefulSet
 metadata:
   name: kafka-connect
 spec:
-  strategy:
-    type: Recreate
+  serviceName: "schema"
+  replicas: 1
   template:
     metadata:
       labels:

@@ -26,7 +26,7 @@ spec:
         pod.beta.kubernetes.io/init-containers: '[
           {
             "name": "install",
-            "image": "buzybox",
+            "image": "confluentinc/cp-kafka-connect:latest",
             "imagePullPolicy": "IfNotPresent",
             "command": ["wget", "https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-5.1.39.tar.gz","|", "tar", "-xzf","*.tar.gz", "-", "-C", "/work-dir/","--strip-components=1","mysql-connector-java-5.1.39/mysql-connector-java-5.1.39-bin.jar"],
             "volumeMounts": [

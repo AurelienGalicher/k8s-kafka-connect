@@ -22,21 +22,21 @@ spec:
     metadata:
       labels:
         app: kafka-connect
-      #annotations:
-      #  pod.beta.kubernetes.io/init-containers: '[
-      #    {
-      #      "name": "install",
-      #      "image": "confluentinc/cp-kafka-connect:latest",
-      #      "imagePullPolicy": "IfNotPresent",
-      #      "command": ["wget", "https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-5.1.39.tar.gz","|", "tar", "-xzf","*.tar.gz", "-", "-C", "/etc/kafka-connect/jars","--strip-components=1","mysql-connector-java-5.1.39/mysql-connector-java-5.1.39-bin.jar"],
-      #      "volumeMounts": [
-      #          {
-      #              "name": "jars",
-      #              "mountPath": "/etc/kafka-connect/jars"
-      #          }
-      #      ]
-      #    }
-      #  ]'
+      annotations:
+        pod.beta.kubernetes.io/init-containers: '[
+          {
+            "name": "install",
+            "image": "confluentinc/cp-kafka-connect:latest",
+            "imagePullPolicy": "IfNotPresent",
+            "command": ["wget", "https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-5.1.39.tar.gz","|", "tar", "-xzf","*.tar.gz", "-C", "/etc/kafka-connect/jars","--strip-components=1","mysql-connector-java-5.1.39/mysql-connector-java-5.1.39-bin.jar"],
+            "volumeMounts": [
+                {
+                    "name": "jars",
+                    "mountPath": "/etc/kafka-connect/jars"
+                }
+            ]
+          }
+        ]'
     spec:
       containers:
       - image: confluentinc/cp-kafka-connect:latest

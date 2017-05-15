@@ -1,18 +1,19 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: kafka-connect
+  name: rest
 spec:
-  type: LoadBalancer
+  #type: LoadBalancer
   ports:
-    - port: 80
-      targetPort: 8888
-      protocol: TCP
+    - port: 8083
+    #  targetPort: 8083
+    #  protocol: TCP
+  clusterIP: None
   selector:
     app: kafka-connect
 ---
-apiVersion: extensions/v1beta1
-kind: Deployment
+apiVersion: apps/v1beta1
+kind: StatefulSet
 metadata:
   name: kafka-connect
 spec:
@@ -29,7 +30,7 @@ spec:
             "image": "confluentinc/cp-kafka-connect:latest",
             "imagePullPolicy": "IfNotPresent",
             "command": ["/bin/bash","-c"],
-            "args": ["wget https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-5.1.39.tar.gz && tar -xzf *.tar.gz -C /etc/kafka-connect/jars --strip-components=1 mysql-connector-java-5.1.39/mysql-connector-java-5.1.39-bin.jar"],
+            "args": ["wget https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-5.1.39.tar.gz  tar -xzf *.tar.gz -C /etc/kafka-connect/jars --strip-components=1 mysql-connector-java-5.1.39/mysql-connector-java-5.1.39-bin.jar"],
             "volumeMounts": [
                 {
                     "name": "jars",
@@ -43,7 +44,7 @@ spec:
       - image: confluentinc/cp-kafka-connect:latest
         name: kafka-connect
         ports:
-        - containerPort: 8888
+        - containerPort: 8083
         env:
         - name: CONNECT_BOOTSTRAP_SERVERS
           value: kafka:9092 
@@ -70,7 +71,7 @@ spec:
         - name: CONNECT_INTERNAL_VALUE_CONVERTER
           value: org.apache.kafka.connect.json.JsonConverter
         - name: CONNECT_REST_ADVERTISED_HOST_NAME
-          value: localhost 
+          value: kafka-connect-0.rest.default.svc.cluster.local
         - name: CONNECT_LOG4J_ROOT_LOGLEVEL
           value: DEBUG
         volumeMounts:

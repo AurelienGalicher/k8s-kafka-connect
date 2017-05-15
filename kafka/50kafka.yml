@@ -24,7 +24,7 @@ spec:
         volumeMounts:
         - name: datadir
           mountPath: /opt/kafka/data
-    volumes:
+      volumes:
       - name: datadir
         emptyDir: {}
   #volumeClaimTemplates:

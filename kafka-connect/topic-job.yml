@@ -1,0 +1,19 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: topic-describe
+  #namespace: kafka
+spec:
+  template:
+    metadata:
+      name: topic-describe
+    spec:
+      containers:
+      - name: kafka
+        image: solsson/kafka:0.10.0.1
+        command:
+        - ./bin/kafka-topics.sh
+        - --describe
+        - --zookeeper
+        - zookeeper:2181
+      restartPolicy: Never

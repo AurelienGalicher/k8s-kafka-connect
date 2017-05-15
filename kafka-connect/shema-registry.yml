@@ -24,7 +24,7 @@ spec:
         app: schema-registry
     spec:
       containers:
-      - image: jconfluentinc/cp-schema-registry:3.2.1
+      - image: confluentinc/cp-schema-registry:3.2.1
         name: schema-registry
         ports:
         - containerPort: 8081

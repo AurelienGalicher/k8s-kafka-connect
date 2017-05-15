@@ -23,11 +23,11 @@ spec:
             - name: ZOOKEEPER_TICK_TIME
               value: "2000" 
             - name: ZOOKEEPER_INIT_LIMIT
-              value: "5" 
+              value: "50" 
             - name: ZOOKEEPER_SYNC_LIMIT
-              value: "2" 
+              value: "20" 
             - name: ZOOKEEPER_SERVERS
-              value: zoo-0.zoo.default.svc.cluster.local:2888:3888;zoo-1.zoo.default.svc.cluster.local:2888:3888;zoo-2.zoo.default.svc.cluster.local:2888:3888;0.0.0.0:2888:3888
+              value: zoo-0.zoo:2888:3888;zoo-1.zoo:2888:3888;zoo-2.zoo:2888:3888
           ports:
             - containerPort: 2181
               name: client

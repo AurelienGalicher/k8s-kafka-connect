@@ -32,6 +32,5 @@ spec:
         - name: SCHEMA_REGISTRY_KAFKASTORE_CONNECTION_URL
           value: zookeeper:2181
         - name: SCHEMA_REGISTRY_HOST_NAME
-          value: localhost
-        - name: SCHEMA_REGISTRY_LISTENERS
-          value: http://localhost:8081
+          value: schema-registry
+        

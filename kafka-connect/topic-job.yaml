@@ -55,6 +55,33 @@ spec:
 apiVersion: batch/v1
 kind: Job
 metadata:
+  name: topic-create-quickstart-avro-config
+  #namespace: kafka
+spec:
+  template:
+    metadata:
+      name: topic-create-quickstart-avro-config
+    spec:
+      containers:
+      - name: kafka
+        image: solsson/kafka:0.10.0.1
+        command:
+        - ./bin/kafka-topics.sh
+        - --create
+        - --topic 
+        - quickstart-avro-config
+        - --partitions 
+        - "1" 
+        - --replication-factor 
+        - "1" 
+        - --if-not-exists 
+        - --zookeeper
+        - zookeeper:2181
+      restartPolicy: Never
+
+apiVersion: batch/v1
+kind: Job
+metadata:
   name: topic-describe
   #namespace: kafka
 spec:

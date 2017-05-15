@@ -24,13 +24,16 @@ spec:
         volumeMounts:
         - name: datadir
           mountPath: /opt/kafka/data
-  volumeClaimTemplates:
-  - metadata:
-      name: datadir
-      annotations:
-        volume.beta.kubernetes.io/storage-class: "default"
-    spec:
-      accessModes: [ "ReadWriteOnce" ]
-      resources:
-        requests:
-          storage: 200Gi
+    volumes:
+      - name: datadir
+        emptyDir: {}
+  #volumeClaimTemplates:
+  #- metadata:
+  #    name: datadir
+  #    annotations:
+  #      volume.beta.kubernetes.io/storage-class: "default"
+  #  spec:
+  #    accessModes: [ "ReadWriteOnce" ]
+  #    resources:
+  #      requests:
+  #        storage: 200Gi

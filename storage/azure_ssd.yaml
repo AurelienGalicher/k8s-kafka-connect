@@ -4,6 +4,6 @@ metadata:
   name: fast
 provisioner: kubernetes.io/azure-disk
 parameters:
-  #skuName: Premium_LRS
+  skuName: Premium_LRS
   #location: <location>
   storageAccount: kafkasecrets

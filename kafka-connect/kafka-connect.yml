@@ -15,7 +15,7 @@ spec:
 apiVersion: apps/v1beta1
 kind: StatefulSet
 metadata:
-  name: kconnect
+  name: kafka-connect
 spec:
   serviceName: "rest"
   replicas: 1
@@ -71,7 +71,7 @@ spec:
         - name: CONNECT_INTERNAL_VALUE_CONVERTER
           value: org.apache.kafka.connect.json.JsonConverter
         - name: CONNECT_REST_ADVERTISED_HOST_NAME
-          value: kconnect-0.rest.default.svc.cluster.local
+          value: kafka-connect-0.rest.default.svc.cluster.local
         - name: CONNECT_LOG4J_ROOT_LOGLEVEL
           value: DEBUG
         volumeMounts:

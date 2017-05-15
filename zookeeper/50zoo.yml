@@ -16,7 +16,7 @@ spec:
         - name: zookeeper
           image: confluentinc/cp-zookeeper:3.2.1
           env:
-            - name: ZOOKEEPER_SERVER_ID
+            - name: MY_POD_NAME #ZOOKEEPER_SERVER_ID
               valueFrom:
                 fieldRef:
                   fieldPath: metadata.name 
@@ -37,6 +37,8 @@ spec:
               name: peer
             - containerPort: 3888
               name: leader-election
+          command: ["/bin/bash","-c"] 
+          args: ["a=$MY_POD_NAME && export ZOOKEEPER_SERVER_ID=${a##*-} && /etc/confluent/docker/run" ]
           volumeMounts:
             - name: datadir
               mountPath: /data

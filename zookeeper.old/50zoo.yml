@@ -1,0 +1,52 @@
+apiVersion: apps/v1beta1
+kind: StatefulSet
+metadata:
+  name: zoo
+  #namespace: kafka
+spec:
+  serviceName: "zoo"
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: zookeeper
+    spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+        - name: zookeeper
+          image: confluentinc/cp-zookeeper:3.2.1
+          env:
+            - name: MY_POD_NAME #ZOOKEEPER_SERVER_ID
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name 
+            - name: ZOOKEEPER_CLIENT_PORT
+              value: "2181" 
+            - name: ZOOKEEPER_TICK_TIME
+              value: "2000" 
+            - name: ZOOKEEPER_INIT_LIMIT
+              value: "50" 
+            - name: ZOOKEEPER_SYNC_LIMIT
+              value: "20" 
+            - name: ZOOKEEPER_SERVERS
+              value: zoo-0.zoo:2888:3888;zoo-1.zoo:2888:3888;zoo-2.zoo:2888:3888
+          ports:
+            - containerPort: 2181
+              name: client
+            - containerPort: 2888
+              name: peer
+            - containerPort: 3888
+              name: leader-election
+          command: ["/bin/bash","-c"] 
+          args: ["a=$MY_POD_NAME && export ZOOKEEPER_SERVER_ID=${a##*-} && /etc/confluent/docker/run" ]
+          volumeMounts:
+            - name: datadir
+              mountPath: /data
+            #There's defaults in this folder, such as logging config
+            #- name: conf
+            #  mountPath: /conf
+      volumes:
+        #- name: conf
+        #  emptyDir: {}
+        - name: datadir
+          emptyDir: {}

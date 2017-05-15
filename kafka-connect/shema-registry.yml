@@ -13,27 +13,29 @@ spec:
   selector:
     app: schema-registry
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1beta1
 kind: StatefulSet
 metadata:
   name: registry
+  namespace: cp-quickstart
 spec:
-  strategy:
-    type: Recreate
+  serviceName: "schema"
+  replicas: 1
   template:
     metadata:
       labels:
         app: schema-registry
     spec:
+      terminationGracePeriodSeconds: 10
       containers:
-      - image: confluentinc/cp-schema-registry:latest
-        name: schema-registry
-        ports:
-        - containerPort: 8081
+      - name: schema-registry
+        image: confluentinc/cp-schema-registry:latest
         env:
         - name: SCHEMA_REGISTRY_KAFKASTORE_CONNECTION_URL
-          value: zookeeper:2181
+          value: zookeeper:32181
         - name: SCHEMA_REGISTRY_HOST_NAME
-          value: registry-0.schema-registry.default.svc.cluster.local
+          value: registry-0.schema.default.svc.cluster.local
         - name: SCHEMA_REGISTRY_LISTENERS
           value: http://0.0.0.0:8081
+        ports:
+        - containerPort: 8081

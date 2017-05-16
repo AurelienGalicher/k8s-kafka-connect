@@ -23,11 +23,11 @@ spec:
     app: kafka-connect
 ---
 apiVersion: apps/v1beta1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: kafka-connect
 spec:
-  #serviceName: "rest"
+  serviceName: "rest"
   replicas: 1
   template:
     metadata:

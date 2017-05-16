@@ -6,8 +6,8 @@ spec:
   #type: LoadBalancer
   ports:
     - port: 8083
-    #  targetPort: 8083
-    #  protocol: TCP
+      targetPort: 8083
+      protocol: TCP
   clusterIP: None
   selector:
     app: kafka-connect

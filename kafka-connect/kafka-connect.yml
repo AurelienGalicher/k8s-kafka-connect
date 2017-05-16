@@ -39,7 +39,7 @@ spec:
             ]
           },
           {
-            "name": "install",
+            "name": "get-jars",
             "image": "confluentinc/cp-kafka-connect:latest",
             "imagePullPolicy": "IfNotPresent",
             "command": ["/bin/bash","-c"],
@@ -52,7 +52,7 @@ spec:
             ]
           },
           {
-            "name": "install",
+            "name": "cleaning",
             "image": "confluentinc/cp-kafka-connect:latest",
             "imagePullPolicy": "IfNotPresent",
             "command": ["/bin/bash","-c"],

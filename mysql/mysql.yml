@@ -6,9 +6,9 @@ metadata:
 spec:
   #type: LoadBalancer
   ports:
-    - port: 3606
-      targetPort: 3606
-      protocol: TCP
+    - port: 3306
+      #targetPort: 3306
+      #protocol: TCP
   #clusterIP: None
   selector:
     app: mysql
@@ -38,4 +38,4 @@ spec:
         - name: MYSQL_DATABASE
           value: confluent_test
         ports:
-        - containerPort: 3606
+        - containerPort: 3306

@@ -5,5 +5,5 @@ metadata:
 provisioner: kubernetes.io/azure-disk
 parameters:
   skuName: Standard_LRS
-  #location: <location>
-  storageAccount: kafkasecrets
+  location: "North Europe"
+  storageAccount: kafkaconnectstore

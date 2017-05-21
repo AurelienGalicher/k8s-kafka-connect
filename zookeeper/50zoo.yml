@@ -35,7 +35,7 @@ spec:
   - metadata:
       name: datadir
       annotations:
-        volume.beta.kubernetes.io/storage-class: "slow"
+        volume.beta.kubernetes.io/storage-class: "default"
     spec:
       accessModes: [ "ReadWriteOnce" ]
       resources:

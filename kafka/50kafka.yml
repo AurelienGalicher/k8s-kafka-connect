@@ -27,13 +27,13 @@ spec:
       volumes:
       - name: datadir
         emptyDir: {}
-  #volumeClaimTemplates:
-  #- metadata:
-  #    name: datadir
-  #    annotations:
-  #      volume.beta.kubernetes.io/storage-class: "default"
-  #  spec:
-  #    accessModes: [ "ReadWriteOnce" ]
-  #    resources:
-  #      requests:
-  #        storage: 200Gi
+  volumeClaimTemplates:
+  - metadata:
+      name: datadir
+      annotations:
+        volume.beta.kubernetes.io/storage-class: "slow"
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 200Gi
